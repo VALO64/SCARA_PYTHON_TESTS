@@ -1,3 +1,7 @@
+# -------------Robot tipo Articulado.------------------------
+# Instituto tecnológico de Chihuahua.
+# Maestro: Rafael Sandoval Rodriguez.
+# Alumno: Oscar Alberto Valles Limas 20060605.
 import matplotlib.pyplot as plt
 import numpy as np
 import math as m
@@ -7,10 +11,13 @@ from mpl_toolkits import mplot3d
 # La libreria numpy sirve para las matrices.
 # Hace que la gráfica sea interactiva y poder mover el punto de perspectiva.
 # Importante seguir esta secuencia de datos theta, d, alpha y a para las matrices que se van a probar.
-th = [ -90,   -90,   0,     90, 0]            # Parámetros cinemáticos del robot, las distancias están en cm y los
-d  = [60,  0,  0,   0, 20]            # ángulos en grados
-al = [ -90, 0, 0,   90, 0]
-a  = [0,  40,   40,     0, 0]
+#vars th1  th2 th3 th4 th5
+#    base hombro codo pitch roll
+th = [-90, -90, 0, 90, 180]            # Parámetros cinemáticos del robot, las distancias están en cm y los
+d  = [60,   0,  0,  0, 20]            # ángulos en grados
+al = [-90,  0,  0, 90, 0]
+a  = [ 0,  40,  40, 0, 0]
+#------------Definimos la función tranmat para obtener las traslaciones--------------------------------------
 def tranmat(th,d,al,a):
     th = th*m.pi/180  #Las funciones trigonométricas reciben el ángulo en radianes, se realiza una conversión
     al = al*m.pi/180  #Al ser alpha dada en grados tambien se combierte
@@ -49,14 +56,14 @@ ax.set_zlabel('Eje z')
 ax.plot3D([10, 10, -10, -10, 10], [10, -10, -10, 10, 10],[0, 0, 0, 0, 0], color = 'k', lw=2) #Para dibujar la placa      
                     # Líneas que representan la placa base del robot
 
-#ax.plot3D([0, 0], [0, 0], [0, d[0]], color = 'k', lw=2)   # Línea del torso del robot
+#ax.plot3D([0, 0], [0, 0], [0, d[0]], color = 'k', lw=2)   # Línea del torso del robot esta linea no es necesaria porque las uniones del robot estan en una linea normal.
 ax.plot3D([0, hombro[0,3]], [0, hombro[1,3]], [0, hombro[2,3]], color = 'k', lw=2)  
 
-#ax.plot3D([hombro[0,3], hombro[0,3]], [hombro[1,3], hombro[1,3]],[hombro[2,3], hombro[2,3]+d[1]], color = 'b', lw=2) # Línea del brazo
+#ax.plot3D([hombro[0,3], hombro[0,3]], [hombro[1,3], hombro[1,3]],[hombro[2,3], hombro[2,3]+d[1]], color = 'b', lw=2) # Línea del brazo esta linea no es necesaria porque las uniones del robot estan en una linea normal.
 ax.plot3D([hombro[0,3], codo[0,3]], [hombro[1,3], codo[1,3]],[hombro[2,3], codo[2,3]], color = 'b', lw=2) # del robot
     
     
-ax.plot3D([codo[0,3], wrist2[0,3]], [codo[1,3], wrist2[1,3]],[codo[2,3], wrist2[2,3]], color = 'r', lw=2) # Línea del antebrazo
+ax.plot3D([codo[0,3], wrist2[0,3]], [codo[1,3], wrist2[1,3]],[codo[2,3], wrist2[2,3]], color = 'r', lw=2) # Línea del antebrazo esta linea no es necesaria porque las uniones del robot estan en una linea normal.
                                                                                           # del robot
 # Dibujo de las líneas que forman la herramienta (tenaza)
         
@@ -65,8 +72,8 @@ ax.plot3D([b[0], g[0]], [b[1], g[1]], [b[2], g[2]], color = 'k', lw=2)
 ax.plot3D([b[0], c[0]], [b[1], c[1]], [b[2], c[2]], color = 'k', lw=2)
 ax.plot3D([e[0], g[0]], [e[1], g[1]], [e[2], g[2]], color = 'b', lw=2)
 
-ax.set_xlim(-100,100) # Dimenciones que queremos en el eje x en este caso de -80 a 80
-ax.set_ylim(-100,100) # Dimenciones que queremos en el eje y en este caso de -80 a 80
-ax.set_zlim(0,160) #Dimenciones que queremos en el eje z en este caso de 0 a 80 siendo el cero el suelo
-ax.set_title('Robot tipo SCARA 4 GdL') # Sirve para mostrar en la parte superior el titulo de la grafica
+ax.set_xlim(-100,100) # Dimenciones que queremos en el eje x en este caso de -100 a 100
+ax.set_ylim(-100,100) # Dimenciones que queremos en el eje y en este caso de -100 a 100
+ax.set_zlim(0,160) #Dimenciones que queremos en el eje z en este caso de 0 a 160 siendo el cero el suelo
+ax.set_title('Robot tipo Articulado GdL') # Sirve para mostrar en la parte superior el titulo de la grafica
 plt.show()  # Comando para mostrar el plot (Gráfica)
